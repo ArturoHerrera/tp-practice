@@ -2,7 +2,10 @@ package com.arthur.totalplaytest.data.repository
 
 import com.arthur.totalplaytest.data.remote.dto.BankReference
 import com.arthur.totalplaytest.data.remote.dto.BankReferencesDto
-import com.arthur.totalplaytest.utils.*
+import com.arthur.totalplaytest.utils.ServiceResult
+import com.arthur.totalplaytest.utils.getDto
+import com.arthur.totalplaytest.utils.getMessage
+import com.arthur.totalplaytest.utils.succeeded
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 
