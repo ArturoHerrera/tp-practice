@@ -6,6 +6,7 @@ import com.arthur.totalplaytest.data.repository.BankReferencesRepository
 import com.arthur.totalplaytest.data.repository.LoginRepository
 import com.arthur.totalplaytest.data.repository.data_source.BankReferencesRetrofitRemoteDataSource
 import com.arthur.totalplaytest.data.repository.data_source.LoginRetrofitRemoteDataSource
+import com.arthur.totalplaytest.data.repository.data_source.SessionDataLocalDataSource
 import com.arthur.totalplaytest.utils.AppPreferences
 import dagger.Module
 import dagger.Provides
@@ -35,9 +36,12 @@ object RepositoryModule {
         prefs: AppPreferences,
         bankRefApi: BankReferencesApi
     ): BankReferencesRepository = BankReferencesRepository(
-        BankReferencesRetrofitRemoteDataSource(
+        remoteDS = BankReferencesRetrofitRemoteDataSource(
             prefs = prefs,
             api = bankRefApi
+        ),
+        sessionDS = SessionDataLocalDataSource(
+            prefs = prefs
         )
     )
 

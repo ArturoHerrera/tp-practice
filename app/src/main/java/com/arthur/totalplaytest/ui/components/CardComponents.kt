@@ -1,10 +1,12 @@
 package com.arthur.totalplaytest.ui.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -38,8 +40,8 @@ fun BankReferenceList(
         }
     } else {
         LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            contentPadding = PaddingValues(top = 0.dp, start = 16.dp, end = 16.dp, bottom = 65.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            contentPadding = PaddingValues(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 65.dp),
             modifier = Modifier.fillMaxSize()
         ) {
             items(bankReferenceList){ bankRef ->
@@ -61,7 +63,12 @@ fun BankReferenceCard(
     Card(
         modifier = Modifier.fillMaxWidth().clickable { reference(bankRef) },
         elevation = 5.dp,
-        backgroundColor = MaterialTheme.colors.background
+        backgroundColor = MaterialTheme.colors.primaryVariant,
+        shape = RoundedCornerShape(5),
+        border = BorderStroke(
+            width = 1.dp,
+            color = MaterialTheme.colors.primaryVariant
+        )
     ) {
         Row(
             horizontalArrangement = Arrangement.Start,

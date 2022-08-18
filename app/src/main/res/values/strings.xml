@@ -12,4 +12,10 @@
     <string name="bank_ref_tittle">Referencias bancarias</string>
     <string name="no_registers_issue">Sin registros</string>
 
+    <!--Logout Dialog-->
+    <string name="logout_title">Cerrar sesión</string>
+    <string name="logout_message">Se cerrará la sesión actual\n¿Desea continuar?</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_continue">Continuar</string>
+
 </resources>

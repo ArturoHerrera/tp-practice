@@ -4,9 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.arthur.totalplaytest.data.repository.BankReferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
@@ -37,6 +39,17 @@ class BankReferencesViewModel @Inject constructor(
                 }
 
             }
+        }
+    }
+
+    fun setLogoutDialogVisibility(isVisible: Boolean){
+        vmUiState.update { it.copy( showLogoutDialog = isVisible) }
+    }
+
+    fun logOut(){
+        viewModelScope.launch {
+            val logoutSuccess = withContext(Dispatchers.IO) { bankReferencesRepository.logout() }
+            vmUiState.update { it.copy( logout = logoutSuccess ) }
         }
     }
 

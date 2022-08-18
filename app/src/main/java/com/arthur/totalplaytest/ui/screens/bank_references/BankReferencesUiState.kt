@@ -6,5 +6,7 @@ data class BankReferencesUiState(
     val loading: Boolean = false,
     val errorMsg: String? = null,
     val showErrorSnack: Boolean = false,
-    val bankRefList: List<BankReference> = listOf()
+    val bankRefList: List<BankReference> = listOf(),
+    val showLogoutDialog: Boolean = false,
+    val logout: Boolean = false
 )

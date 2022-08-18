@@ -52,7 +52,7 @@ class MainActions(navController: NavHostController) {
     }
     val navigateFromBankRefToLogin: () -> Unit = {
         navController.navigate(Destinations.LOGIN_ROUTE) {
-            popUpTo(Destinations.LOGIN_ROUTE) { inclusive = true }
+            popUpTo(Destinations.BANK_REFERENCE_ROUTE) { inclusive = true }
         }
     }
 }

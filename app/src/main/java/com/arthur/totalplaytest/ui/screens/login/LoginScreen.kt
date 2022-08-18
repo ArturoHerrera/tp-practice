@@ -49,132 +49,119 @@ fun LoginScreen(
     Scaffold(
         scaffoldState = scaffoldState
     ) {
-        Column(
-            modifier = Modifier.fillMaxSize()
-        ) {
-            Surface() {
-                if (uiState.loading) {
-                    LinearProgressIndicator(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(5.dp),
-                        color = MaterialTheme.colors.secondary
-                    )
-                }
+        Box {
+            if (uiState.loading) {
+                LinearProgressIndicator(
+                    color = MaterialTheme.colors.secondary,
+                    modifier = Modifier.fillMaxWidth().height(5.dp)
+                )
             }
-            Box(
+        }
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_total_play),
+                contentDescription = stringResource(id = R.string.login_logo_desc),
+                contentScale = ContentScale.Fit,
                 modifier = Modifier
-                    .fillMaxSize()
-                    .background(MaterialTheme.colors.background)
+                    .fillMaxWidth()
+                    .padding(start = 100.dp, end = 100.dp, top = 24.dp)
+                    .weight(3f)
+            )
+
+            Column(
+                verticalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .weight(3f)
+                    .wrapContentHeight(Alignment.CenterVertically)
             ) {
-                Column(
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally,
+                //TODO Move to login component
+                OutlinedTextField(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .verticalScroll(rememberScrollState())
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.ic_total_play),
-                        contentDescription = stringResource(id = R.string.login_logo_desc),
-                        contentScale = ContentScale.Fit,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 100.dp, end = 100.dp, top = 24.dp)
-                            .weight(3f)
+                        .padding(start = 16.dp, end = 16.dp, top = 24.dp)
+                        .fillMaxWidth(),
+                    value = user,
+                    onValueChange = setUser,
+                    label = { Text(text = stringResource(id = R.string.login_label_user)) },
+                    colors = TextFieldDefaults.outlinedTextFieldColors(
+                        focusedBorderColor = MaterialTheme.colors.primary,
+                        textColor = MaterialTheme.colors.primary,
+                        cursorColor = MaterialTheme.colors.primary,
+                        focusedLabelColor = MaterialTheme.colors.primary,
+                        unfocusedLabelColor = MaterialTheme.colors.primary,
+                        unfocusedBorderColor = MaterialTheme.colors.primary
+                    ),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Email,
+                        autoCorrect = false,
+                        imeAction = ImeAction.Next
                     )
+                )
 
-                    Column(
-                        verticalArrangement = Arrangement.SpaceBetween,
-                        modifier = Modifier
-                            .weight(3f)
-                            .wrapContentHeight(Alignment.CenterVertically)
-                    ) {
-                        //TODO Move to login component
-                        OutlinedTextField(
-                            modifier = Modifier
-                                .padding(start = 16.dp, end = 16.dp, top = 24.dp)
-                                .fillMaxWidth(),
-                            value = user,
-                            onValueChange = setUser,
-                            label = { Text(text = stringResource(id = R.string.login_label_user)) },
-                            colors = TextFieldDefaults.outlinedTextFieldColors(
-                                focusedBorderColor = MaterialTheme.colors.primary,
-                                textColor = MaterialTheme.colors.primary,
-                                cursorColor = MaterialTheme.colors.primary,
-                                focusedLabelColor = MaterialTheme.colors.primary,
-                                unfocusedLabelColor = MaterialTheme.colors.primary,
-                                unfocusedBorderColor = MaterialTheme.colors.primary
-                            ),
-                            keyboardOptions = KeyboardOptions(
-                                keyboardType = KeyboardType.Email,
-                                autoCorrect = false,
-                                imeAction = ImeAction.Next
-                            )
-                        )
-
-                        //TODO Move to login component
-                        OutlinedTextField(
-                            modifier = Modifier
-                                .padding(start = 16.dp, end = 16.dp, top = 8.dp)
-                                .fillMaxWidth(),
-                            value = password,
-                            onValueChange = setPassword,
-                            colors = TextFieldDefaults.outlinedTextFieldColors(
-                                focusedBorderColor = MaterialTheme.colors.primary,
-                                textColor = MaterialTheme.colors.primary,
-                                cursorColor = MaterialTheme.colors.primary,
-                                focusedLabelColor = MaterialTheme.colors.primary,
-                                unfocusedLabelColor = MaterialTheme.colors.primary,
-                                unfocusedBorderColor = MaterialTheme.colors.primary
-                            ),
-                            label = { Text(text = stringResource(id = R.string.login_label_pass)) },
-                            visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
-                            keyboardOptions = KeyboardOptions(
-                                keyboardType = KeyboardType.Password,
-                                autoCorrect = false,
-                                imeAction = ImeAction.Done
-                            ),
-                            keyboardActions = KeyboardActions(onDone = {
-                                if (user.isNotBlank() && password.isNotBlank()) {
-                                    focusManager.clearFocus(true)
-                                    viewModel.login(user, password)
-                                } else {
-                                    focusManager.clearFocus(true)
-                                }
-                            }),
-                            trailingIcon = {
-                                IconButton(
-                                    onClick = { passwordVisibility = !passwordVisibility }
-                                ) {
-                                    Icon(
-                                        imageVector = if (passwordVisibility) Icons.Filled.Visibility else Icons.Filled.VisibilityOff,
-                                        contentDescription = null
-                                    )
-                                }
-                            }
-                        )
-                    }
-
-                    Column(
-                        modifier = Modifier.weight(7f)
-                    ) {
-                        Button(
-                            modifier = Modifier.padding(top = 24.dp),
-                            shape = RoundedCornerShape(50),
-                            enabled = user.isNotBlank() && password.isNotBlank(),
-                            onClick = {
-                                focusManager.clearFocus(true)
-                                viewModel.login(user, password)
-                            }
+                //TODO Move to login component
+                OutlinedTextField(
+                    modifier = Modifier
+                        .padding(start = 16.dp, end = 16.dp, top = 8.dp)
+                        .fillMaxWidth(),
+                    value = password,
+                    onValueChange = setPassword,
+                    colors = TextFieldDefaults.outlinedTextFieldColors(
+                        focusedBorderColor = MaterialTheme.colors.primary,
+                        textColor = MaterialTheme.colors.primary,
+                        cursorColor = MaterialTheme.colors.primary,
+                        focusedLabelColor = MaterialTheme.colors.primary,
+                        unfocusedLabelColor = MaterialTheme.colors.primary,
+                        unfocusedBorderColor = MaterialTheme.colors.primary
+                    ),
+                    label = { Text(text = stringResource(id = R.string.login_label_pass)) },
+                    visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Password,
+                        autoCorrect = false,
+                        imeAction = ImeAction.Done
+                    ),
+                    keyboardActions = KeyboardActions(onDone = {
+                        if (user.isNotBlank() && password.isNotBlank()) {
+                            focusManager.clearFocus(true)
+                            viewModel.login(user, password)
+                        } else {
+                            focusManager.clearFocus(true)
+                        }
+                    }),
+                    trailingIcon = {
+                        IconButton(
+                            onClick = { passwordVisibility = !passwordVisibility }
                         ) {
-                            Text(
-                                text = stringResource(id = R.string.login_label_login),
-                                modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp)
+                            Icon(
+                                imageVector = if (passwordVisibility) Icons.Filled.Visibility else Icons.Filled.VisibilityOff,
+                                contentDescription = null
                             )
                         }
                     }
+                )
+            }
 
+            Column(
+                modifier = Modifier.weight(7f)
+            ) {
+                Button(
+                    modifier = Modifier.padding(top = 24.dp),
+                    shape = RoundedCornerShape(50),
+                    enabled = user.isNotBlank() && password.isNotBlank(),
+                    onClick = {
+                        focusManager.clearFocus(true)
+                        viewModel.login(user, password)
+                    }
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.login_label_login),
+                        modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp)
+                    )
                 }
             }
 

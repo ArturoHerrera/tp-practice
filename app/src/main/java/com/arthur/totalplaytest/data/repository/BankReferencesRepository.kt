@@ -7,7 +7,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 
 class BankReferencesRepository(
-    private val remoteDS: BankReferencesRemoteDataSource
+    private val remoteDS: BankReferencesRemoteDataSource,
+    private val sessionDS: SessionLocalDataSource
 ) {
 
     //TODO Improve error response
@@ -23,8 +24,15 @@ class BankReferencesRepository(
         .filterNotNull()
         .catch { e -> e.printStackTrace() }
         .flowOn(Dispatchers.IO)
+
+
+    suspend fun logout(): Boolean = sessionDS.logOut()
 }
 
 interface BankReferencesRemoteDataSource {
     suspend fun getBankReferences(): ServiceResult<BankReferencesDto>
+}
+
+interface SessionLocalDataSource {
+    suspend fun logOut(): Boolean
 }
