@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">TotalPlaytest</string>
+
+    <!-- LOGIN SCREEN -->
+    <string name="login_label_user">Usuario</string>
+    <string name="login_label_pass">Contraseña</string>
+    <string name="login_label_login">Iniciar sesión</string>
+    <string name="login_logo_desc">Logotipo</string>
+    <string name="login_form_error">El campo de usuario y contraseña no pueden ir vacios.</string>
+
+    <!-- BANK REFERENCES SCREEN -->
+    <string name="bank_ref_tittle">Referencias bancarias</string>
+    <string name="no_registers_issue">Sin registros</string>
+
+    <!--Logout Dialog-->
+    <string name="logout_title">Cerrar sesión</string>
+    <string name="logout_message">Se cerrará la sesión actual\n¿Desea continuar?</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_continue">Continuar</string>
+
 </resources>
