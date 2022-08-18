@@ -1,6 +1,6 @@
 # tp-practice
 
-Practica realiza con:
+Práctica realiza con:
 - MVVM
 - Compose
 - Retrofit
