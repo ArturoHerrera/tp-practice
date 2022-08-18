@@ -1,6 +1,7 @@
 package com.arthur.totalplaytest.di
 
 import com.arthur.totalplaytest.data.remote.api.AuthApi
+import com.arthur.totalplaytest.data.remote.api.BankReferencesApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,5 +15,8 @@ object ApiModule {
 
     @Provides
     fun provideAuthService(retrofit: Retrofit): AuthApi = retrofit.create(AuthApi::class.java)
+
+    @Provides
+    fun provideBankRefService(retrofit: Retrofit): BankReferencesApi = retrofit.create(BankReferencesApi::class.java)
 
 }
